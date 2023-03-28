@@ -1,0 +1,24 @@
+version: '3.8'
+
+networks:
+  mysql:
+    driver: bridge
+
+services:
+  db:
+    image: mysql:8.0    
+    restart: always
+    environment:
+      - MYSQL_DATABASE='book_example'
+      - MYSQL_USER='root'
+      - MYSQL_ROOT_PASSWORD='password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - mysql
+volumes:
+  db:
+    driver: local
