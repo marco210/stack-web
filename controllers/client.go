@@ -38,28 +38,28 @@ func GetBookById(c *gin.Context){
 
 func GetAllBook(c *gin.Context){
 	db := database.DBConn()
-	// rows, err := db.Query("SELECT * FROM books ")
-	// if err != nil{
-	// 	c.JSON(500, gin.H{
-	// 		"messages" : "Book not found",
-	// 	});
-	// }
+	rows, err := db.Query("SELECT * FROM books ")
+	if err != nil{
+		c.JSON(500, gin.H{
+			"messages" : "Book not found",
+		});
+	}
 
 	book := models.Book{}
 
-	// for rows.Next(){
-	// 	var id int
-	// 	var title, author string
+	for rows.Next(){
+		var id int
+		var title, author string
 
-	// 	err = rows.Scan(&id, &title, &author)
-	// 	if err != nil {
-	// 		panic(err.Error())
-	// 	}
+		err = rows.Scan(&id, &title, &author)
+		if err != nil {
+			panic(err.Error())
+		}
 
-	// 	book.ID = id
-	// 	book.Title = title
-	// 	book.Author = author
-	// }
+		book.ID = id
+		book.Title = title
+		book.Author = author
+	}
 
 	c.IndentedJSON(http.StatusOK, book)
 	defer db.Close()
