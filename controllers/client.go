@@ -46,6 +46,7 @@ func GetAllBook(c *gin.Context){
 	}
 
 	book := models.Book{}
+	books := make([]models.Book, 0)
 
 	for rows.Next(){
 		var id int
@@ -59,9 +60,10 @@ func GetAllBook(c *gin.Context){
 		book.ID = id
 		book.Title = title
 		book.Author = author
+		books = append(books,book)
 	}
 
-	c.IndentedJSON(http.StatusOK, book)
+	c.IndentedJSON(http.StatusOK, books)
 	defer db.Close()
 
 }

@@ -1,3 +1,11 @@
+-- Run mysql docker
+docker run --name mysql -d     -p 3306:3306     -e MYSQL_ROOT_PASSWORD=password     --restart unless-stopped    mysql:8
+
+
+CREATE database book_example;
+
+use book_example;
+
 CREATE TABLE books (
     ID int,
     Title varchar(255),
