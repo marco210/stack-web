@@ -1,14 +1,24 @@
+# FROM golang:1.20-alpine
+# WORKDIR /app
+# COPY ./ ./
+# RUN go mod download
+# RUN go build -o stack-web ./public/main.go
+# EXPOSE 9000
+# ENTRYPOINT [ "/app/stack-web" ]
+
 FROM golang:1.20-alpine
 
 WORKDIR /app
 
-RUN export GO111MODULE=on
-RUN go get github.com/marco210/stack-web
+COPY ./go.mod .
+COPY ./go.sum .
+COPY . . 
 
-RUN cd /app  && git clone https://github.com/marco210/stack-web.git
+RUN go build -o main ./public/main.go
 
-RUN cd /app/stack-web/public && go build
+WORKDIR /dist
+
+RUN cp /app/main .
 
 EXPOSE 9000
-
-ENTRYPOINT [ "/app/stack-web/public/main" ]
+CMD [ "/dist/main" ]

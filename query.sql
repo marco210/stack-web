@@ -15,5 +15,5 @@ CREATE TABLE books (
 Insert into books(ID,Title,Author) values(1,"Sherlock Holmes","Conan Doyle");
 
 
-docker build -t web-stack
-docker run -p 9000:9000 -tid web-stack
+docker build -t web-stack .
+docker run --name myapp -p 9000:9000 --restart unless-stopped  web-stack

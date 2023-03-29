@@ -3,9 +3,6 @@ import (
 	"github.com/marco210/stack-web/controllers"
 	"github.com/gin-gonic/gin"
 )
-
-
-
 	
 func main(){	
 	router := gin.Default()
@@ -15,12 +12,11 @@ func main(){
 			"message": "test GET func",
 		})
 	})
-	router.LoadHTMLGlob("www/*")
 	// router.GET("/books/new", controllers.CreateBookHandler)
 	router.POST("/books", controllers.CreateBook)
 	router.POST("/books/new", controllers.CreateBookForm)
 	router.GET("/books/:id",controllers.GetBookById)
 	router.GET("/books", controllers.GetAllBook)
 
-	router.Run("localhost:9000")
+	router.Run(":9000")
 }
