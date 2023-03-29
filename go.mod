@@ -1,4 +1,4 @@
-module web
+module github.com/marco210/stack-web
 
 go 1.20
 

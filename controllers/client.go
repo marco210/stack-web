@@ -2,14 +2,15 @@ package controllers
 
 import (
 	"net/http"
-	"web/database"
-	"web/models"
+	"github.com/marco210/stack-web/database"
+	"github.com/marco210/stack-web/models"
 	"github.com/gin-gonic/gin"
 )
 
 func CreateBook(c *gin.Context){
 	db:= database.DBConn()
 
+	// json
 	var json models.Book
 
 	if err := c.ShouldBindJSON(&json); err == nil {
@@ -30,6 +31,20 @@ func CreateBook(c *gin.Context){
 	}
 
 	defer db.Close()
+}
+
+func CreateBookForm(c *gin.Context){
+	var form models.Book
+
+	if err:=c.ShouldBind(&form); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if  form.Title != "" || form.Author !="" {
+		c.JSON(http.StatusOK, gin.H{"status": "OK"})
+		return
+	} 
 }
 
 func GetBookById(c *gin.Context){
