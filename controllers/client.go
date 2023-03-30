@@ -14,7 +14,7 @@ func CreateBook(c *gin.Context){
 	var json models.Book
 
 	if err := c.ShouldBindJSON(&json); err == nil {
-		insPost, err := db.Prepare("INSERT INTO books(id,title, author) VALUES(?,?,?)",)
+		insPost, err := db.Prepare("INSERT INTO books(id,title,author) VALUES(?,?,?)",)
 		if err != nil {
 			c.JSON(500, gin.H{
 				"messages" : err,
@@ -33,19 +33,19 @@ func CreateBook(c *gin.Context){
 	defer db.Close()
 }
 
-func CreateBookForm(c *gin.Context){
-	var form models.Book
+// func CreateBookForm(c *gin.Context){
+// 	var form models.Book
 
-	if err:=c.ShouldBind(&form); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+// 	if err:=c.ShouldBind(&form); err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+// 		return
+// 	}
 
-	if  form.Title != "" || form.Author !="" {
-		c.JSON(http.StatusOK, gin.H{"status": "OK"})
-		return
-	} 
-}
+// 	if  form.Title != "" || form.Author !="" {
+// 		c.JSON(http.StatusOK, gin.H{"status": "OK"})
+// 		return
+// 	} 
+// }
 
 func GetBookById(c *gin.Context){
 
