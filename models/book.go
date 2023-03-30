@@ -3,8 +3,8 @@ package models
 // json
 type Book struct{
 	ID int `json:"id" gorm:"primary_key" form:"id"`
-	Title string `json:"title" form:"title"`
-	Author string `json:"author form:"author"`
+	Title string `json:"title"`
+	Author string `json:"author"`
 }
 
 

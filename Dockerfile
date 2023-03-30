@@ -14,7 +14,14 @@ COPY ./go.mod .
 COPY ./go.sum .
 COPY . . 
 
-RUN go build -o main ./public/main.go
+ENV DB_DRIVER mysql
+ENV DB_USER root
+ENV DB_PASS password
+ENV DB_NAME book_example
+ENV DB_HOST 0.0.0.0
+ENV DB_PORT 3306
+
+RUN go build -o main ./main.go
 
 WORKDIR /dist
 
