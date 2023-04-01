@@ -32,3 +32,16 @@ GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;
 CREATE USER 'user'@'%' IDENTIFIED BY 'password';
 GRANT ALL ON *.* TO 'user'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
+
+http://localhost:8080/api/books
+http://localhost:8080/
+
+localhost:8080/api/books
+
+curl --location 'localhost:8080/api/books' \
+--header 'Content-Type: application/json' \
+--data '{
+    "ID": 3,
+    "Title": "Hai con meo ben cua so",
+    "author": "Nguyen Nhat Anh"
+}'

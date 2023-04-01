@@ -79,5 +79,15 @@ services:
       - db    
     networks: 
       - myapp
-
+  nginx:
+    image: nginx:1.19
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./www:/www/html
+    depends_on:
+      - myapp
+    networks:
+      - myapp
 
